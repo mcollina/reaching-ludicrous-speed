@@ -1,0 +1,194 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    title Reaching Ludicrous Speed
+
+    link(rel='stylesheet', type='text/css', href='build/build.css')
+
+  body
+
+    article
+
+      section
+        a(href="http://nearform.com" style="width: 20%")
+          img(src="./images/nearform.svg")
+        h1 Reaching Ludicrous Speed
+        h2 by&nbsp;
+          a(href="http://twitter.com/matteocollina") @matteocollina
+
+      section(data-bespoke-backdrop='nodeconfeu').trans
+        h2(style="color: white") Back in 2013..
+        br
+        br
+
+      section(data-bespoke-backdrop='menodeconfeu').trans
+
+      section
+        h3 MQTT and Node.js: Messaging in the Internet of Things
+        iframe(width="560" height="315" src="https://www.youtube.com/embed/WE7GVIFRV7Q" frameborder="0" allowfullscreen)
+
+      section
+        img(src="images/mosca.jpg")
+        br
+        ul.bullet
+          li MQTT broker written in node
+          li Open source
+          li
+            b fast
+            | &nbsp;up to 20.000 publish/second
+          li CPU bound
+
+      section(data-bespoke-backdrop='speed').trans
+        h2(style="color: white") Fast?
+
+      section(data-bespoke-backdrop='node-desktop').trans
+        h2(style="color: white; margin-bottom: -50%").bullet can be faster!
+
+      section(data-bespoke-backdrop='hole').trans
+        h2(style="color: white; margin-bottom: -50%") Down the rabbit hole of performance optimizations
+
+      section
+        h3 Achieving
+        img(src="images/10x.png" style="height: 50%")
+        br
+        h3 Performance boost
+
+      section
+        h2 Tools
+        ul.bullet
+          li flamegraphs
+          li dtrace
+          li mdb
+
+      section
+        h2 What worked
+        pre
+          code.language-none.
+            node --trace_opt --trace_inlining --trace_deopt
+
+      section
+        h2 How node works
+        br
+        img(src="images/event-loop.png" style="height: 80%")
+
+      section
+        h2 How to get fast
+        p
+          b fast
+          | &nbsp;means we can do more I/O
+        ul.bullet
+          li get an I/O event
+          li process the event
+          li release the CPU
+          li
+            b as fast as possible
+
+      section
+        h2 V8
+        ul.bullet
+          li can optimize our functions
+          li only when they run enough time
+          li in Mosca, I was allocating a ton of functions
+          li most of them anonymous
+
+      section
+        h2 My enemy
+        pre
+          code.language-none.
+            [marking 0x1a308644a581
+              &lt;JS Function (SharedFunctionInfo 0xf1f928b34e9)&gt;
+              for recompilation, reason: small function,
+              ICs with typeinfo: 8/8 (100%), generic ICs: 0/8 (0%)]
+
+      section
+        h2 My enemy
+        pre
+          code.language-javascript.
+            function (err, data) {
+              /* whatever is done here
+                 is not going to be optimized */
+            }
+
+      section
+        h2 Code time!
+
+      section
+        h2 All benchmarks results
+        img(src="images/all-bench.png")
+
+      section
+        h2 Rules for hot code path 1/2
+
+        ul.bullet
+          li Do not allocate functions
+          li Make sure that V8 can optimize them
+          li When you are at 100% of CPU, everything is hot
+
+      section
+        h2 The missing bit
+        br
+        img(src="images/event-loop-gc.png" style="height: 80%")
+
+      section
+        h2 The final (?) step of improvement
+
+        ul
+          li In Mosca I was allocating a buffer for each packet
+          li copying over all the relevant information
+          li which would mean all those buffer neeeded to be collected
+          li solution: stream packet generation and avoid allocation
+          li memoize headers: so these do not need to be allocated anymore
+          li what made the difference: use cork()/uncork() to avoid crossing the JS/C++ barrier
+
+      section
+        h2 Rules for hot code path 2/2
+
+        ul.bullet
+          li GC time counts!
+          li Allocate as few objects as possible
+          li slow code that does not allocate
+          li might turn out to be faster
+
+      section
+        h2 Improving node
+
+        ul.bullet
+          li Using this process, I have found a perf bug in node
+          li which can make your streams run 5-50% faster
+          li in my case, it was the last 10%
+          li https://github.com/nodejs/node/pull/3751
+          li hint: your http requests are streams :)
+
+      section
+        img(src='images/steed.svg' style="height: 80%")
+        br
+        a(href="http://npm.im/steed") http://npm.im/steed
+
+      section
+        ul
+          li steed.each
+          li steed.map
+          li steed.eachSeries
+          li steed.mapSeries
+          li steed.parallel
+          li steed.series
+          li steed.waterfall
+          li steed.queue
+
+      section.full-imgs
+        img(src='images/me.png')
+        h3
+          a(href='http://github.com/mcollina') http://github.com/mcollina
+
+      section
+        h1 Thanks!
+        br
+        p If you need help with Node.js
+        br
+        h3 <a href="mailto:matteo.collina@nearform.com">matteo.collina@nearform.com</a>
+        h3 <a href="http://twitter.com/matteocollina">@matteocollina</a> on Twitter
+        h3 <a href="http://www.nearform.com">www.nearform.com</a>
+
+    script(src='build/build.js')
