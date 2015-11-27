@@ -12,11 +12,16 @@ html
     article
 
       section
-        a(href="http://nearform.com" style="width: 20%")
-          img(src="./images/nearform.svg")
-        h1 Reaching Ludicrous Speed
-        h2 by&nbsp;
+        h1 Reaching
+        img(src="./images/ludicrous.gif")
+        br
+        h3 by&nbsp;
           a(href="http://twitter.com/matteocollina") @matteocollina
+
+        p.copyright.
+          Ludicrous speed is from Spaceballs
+
+      section(data-bespoke-backdrop='spaceballs').trans
 
       section(data-bespoke-backdrop='nodeconfeu').trans
         h2(style="color: white") Back in 2013..
@@ -119,6 +124,25 @@ html
         img(src="images/all-bench.png")
 
       section
+        h2 Code time!
+
+      section
+        img(src='images/steed.svg' style="height: 80%")
+        br
+        a(href="http://npm.im/steed") http://npm.im/steed
+
+      section
+        ul
+          li steed.each
+          li steed.map
+          li steed.eachSeries
+          li steed.mapSeries
+          li steed.parallel
+          li steed.series
+          li steed.waterfall
+          li steed.queue
+
+      section
         h2 Rules for hot code path 1/2
 
         ul.bullet
@@ -166,17 +190,6 @@ html
         br
         a(href="http://npm.im/steed") http://npm.im/steed
 
-      section
-        ul
-          li steed.each
-          li steed.map
-          li steed.eachSeries
-          li steed.mapSeries
-          li steed.parallel
-          li steed.series
-          li steed.waterfall
-          li steed.queue
-
       section.full-imgs
         img(src='images/me.png')
         h3
@@ -184,6 +197,8 @@ html
 
       section
         h1 Thanks!
+        a(href="http://nearform.com" style="width: 20%")
+          img(src="./images/nearform.svg")
         br
         p If you need help with Node.js
         br
