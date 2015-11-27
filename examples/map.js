@@ -1,14 +1,8 @@
 
 var bench = require('fastbench')
-var fastparallel = require('fastparallel')()
 var neo = require('neo-async')
-var async = require('async')
 var steed = require('steed')()
 var max = 1000000
-
-function benchFastParallel (cb) {
-  fastparallel(new State(cb, 2), multiply, [1, 2, 3], done)
-}
 
 function benchSteed (cb) {
   steed.map(new State(cb, 2), [1, 2, 3], multiply, done)
@@ -35,8 +29,9 @@ function done (err, results) {
 }
 
 function benchNeo (cb) {
+  var factor = 2
   neo.map([1, 2, 3], function work (arg, cb) {
-    setImmediate(cb, null, arg * 2)
+    setImmediate(cb, null, arg * factor)
   }, function (err, results) {
     if (err) { return cb(err) }
 
@@ -47,33 +42,11 @@ function benchNeo (cb) {
 
     cb(null, acc)
   })
-}
-
-function benchAsync (cb) {
-  async.map([1, 2, 3], function work (arg, cb) {
-    setImmediate(cb, null, arg * 2)
-  }, function (err, results) {
-    if (err) { return cb(err) }
-
-    var acc = 0
-    for (var i = 0; i < results.length; i++) {
-      acc += results[i]
-    }
-
-    cb(null, acc)
-  })
-}
-
-function benchFastParallelNoClass (cb) {
-  fastparallel({ cb: cb, factor: 2 }, multiply, [1, 2, 3], done)
 }
 
 if (require.main == module) {
   var run = bench([
-    benchFastParallel,
-    benchFastParallelNoClass,
     benchSteed,
-    benchAsync,
     benchNeo
   ], max)
 

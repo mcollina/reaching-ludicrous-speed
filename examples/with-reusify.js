@@ -57,7 +57,7 @@ if (require.main == module) {
   var run = bench([
     benchNaive,
     benchNaiveFaster,
-    benchNoWithReusify,
+    benchWithReusify,
     benchSetImmediate
   ], max)
   run(run)
