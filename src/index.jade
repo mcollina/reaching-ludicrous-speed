@@ -118,6 +118,9 @@ html
 
       section
         h2 Code time!
+        ul.bullet
+          li
+            a(href="https://github.com/mcollina/reaching-ludicrous-speed/blob/master/examples/") https://github.com/mcollina/reaching-ludicrous-speed/blob/master/examples/
 
       section
         h2 All benchmarks results
@@ -125,6 +128,9 @@ html
 
       section
         h2 Code time!
+        ul.bullet
+          li
+            a(href="https://github.com/mcollina/reaching-ludicrous-speed/blob/master/examples/") https://github.com/mcollina/reaching-ludicrous-speed/blob/master/examples/
 
       section
         img(src='images/steed.svg' style="height: 80%")
@@ -132,7 +138,14 @@ html
         a(href="http://npm.im/steed") http://npm.im/steed
 
       section
-        ul
+        img(src='images/steed.svg' style="height: 50%")
+        pre
+          code.language-javascript.
+            var steed = require('steed')()
+            steed.map(new State(cb, 2), [1, 2, 3], multiply, done)
+
+      section
+        ul.bullet
           li steed.each
           li steed.map
           li steed.eachSeries
@@ -193,6 +206,16 @@ html
         img(src='images/steed.svg' style="height: 80%")
         br
         a(href="http://npm.im/steed") http://npm.im/steed
+
+      section
+        h2 This presentation
+        ul.bullet
+          li
+            a(href="https://mcollina.github.io/reaching-ludicrous-speed").
+              https://mcollina.github.io/reaching-ludicrous-speed
+          li
+            a(href="https://github.com/mcollina/reaching-ludicrous-speed").
+              https://github.com/mcollina/reaching-ludicrous-speed
 
       section.full-imgs
         img(src='images/me.png')
