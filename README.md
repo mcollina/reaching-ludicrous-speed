@@ -1,6 +1,8 @@
 # Reaching Ludicrous Speed
 > A [Bespoke.js](http://markdalgleish.com/projects/bespoke.js) presentation, built with [generator-bespoke](https://github.com/markdalgleish/generator-bespoke)
 
+Watch the youtube video at https://www.youtube.com/watch?v=_0W_822Dijg
+
 ## View slides locally
 
 First, ensure you have the following installed:
