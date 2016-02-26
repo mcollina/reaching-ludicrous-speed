@@ -165,14 +165,26 @@ steed.map(new State(cb, 2), [1, 2, 3], multiply, done)
         <h2>Improving node</h2>
         <ul class="bullet">
           <li>Using this process, I have found a perf bug in node</li>
-          <li>which can make your streams run 5-50% faster</li>
+          <li>which can make your streams run 5-10% faster</li>
           <li>in my case, it was the last 10%</li>
-          <li>https://github.com/nodejs/node/pull/3751</li>
+          <li>https://github.com/nodejs/node/pull/4354</li>
           <li>hint: your http requests are streams :)</li>
+          <li>this has just been released on node v5.7.0</li>
         </ul>
       </section>
       <section>
         <h3>Most code does not need to go</h3><img src="./images/ludicrous.gif">
+      </section>
+      <section>
+        <h3>One last thing.. flamegraphs!</h3><img src="./images/flamegraph.png" style="height: 50%">
+      </section>
+      <section>
+        <h3>How to generate them</h3>
+        <ul>
+          <li>Check out&nbsp;<a href="http://npm.im/perf-sym">perf-sym</a>&nbsp;and&nbsp;<a href="http://npm.im/stackvis">stackvis</a></li>
+          <li>More awesome tooling coming around this..</li>
+          <li>demo</li>
+        </ul>
       </section>
       <section><img src="images/steed.svg" style="height: 80%"><br><a href="http://npm.im/steed">http://npm.im/steed</a></section>
       <section>
