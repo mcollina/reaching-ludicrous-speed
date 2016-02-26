@@ -1,3 +1,4 @@
+'use strict'
 
 var benchSetImmediate = require('./benchSetImmediate')
 var benchNaive = require('./naive')
@@ -31,6 +32,10 @@ function immediate (cb) {
 module.exports = benchNaiveFaster
 
 if (require.main == module) {
-  var run = bench([benchNaive, benchNaiveFaster, benchSetImmediate], max)
+  var run = bench([
+    benchNaive,
+    benchNaiveFaster,
+    benchSetImmediate
+  ], max)
   run(run)
 }

@@ -1,3 +1,4 @@
+'use strict'
 
 var benchSetImmediate = require('./benchSetImmediate')
 var benchNaive = require('./naive')

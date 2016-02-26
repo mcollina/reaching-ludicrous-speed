@@ -1,3 +1,7 @@
+'use strict'
+
+var bench = require('fastbench')
+var max = 1000000
 
 var nextDone
 var nextCount
@@ -18,3 +22,8 @@ function somethingImmediate () {
 }
 
 module.exports = benchSetImmediate
+
+if (require.main === module) {
+  var run = bench([benchSetImmediate], max)
+  run(run)
+}

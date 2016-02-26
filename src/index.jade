@@ -193,14 +193,29 @@ html
 
         ul.bullet
           li Using this process, I have found a perf bug in node
-          li which can make your streams run 5-50% faster
+          li which can make your streams run 5-10% faster
           li in my case, it was the last 10%
-          li https://github.com/nodejs/node/pull/3751
+          li https://github.com/nodejs/node/pull/4354
           li hint: your http requests are streams :)
+          li this has just been released on node v5.7.0
 
       section
         h3 Most code does not need to go
         img(src="./images/ludicrous.gif")
+
+      section
+        h3 One last thing.. flamegraphs!
+        img(src="./images/flamegraph.png" style="height: 50%")
+
+      section
+        h3 How to generate them
+        ul
+          li Check out&nbsp;
+            a(href="http://npm.im/perf-sym") perf-sym
+            | &nbsp;and&nbsp;
+            a(href="http://npm.im/stackvis") stackvis
+          li More awesome tooling coming around this..
+          li demo
 
       section
         img(src='images/steed.svg' style="height: 80%")

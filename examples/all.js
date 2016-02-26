@@ -1,3 +1,4 @@
+'use strict'
 
 var benchSetImmediate = require('./benchSetImmediate')
 var benchNaive = require('./naive')
@@ -9,7 +10,7 @@ var fastparallel = require('fastparallel')({ results: false })
 var async = require('async')
 var neo = require('neo-async')
 var steed = require('steed')()
-var max = 10000000
+var max = 1000000
 
 function benchFastParallel (cb) {
   fastparallel(null, [immediateFP, immediateFP, immediateFP], null, cb)

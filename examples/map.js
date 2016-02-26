@@ -1,6 +1,8 @@
+'use strict'
 
 var bench = require('fastbench')
 var neo = require('neo-async')
+var async = require('async')
 var steed = require('steed')()
 var max = 1000000
 
@@ -10,7 +12,7 @@ function benchSteed (cb) {
 
 function State (cb, factor) {
   this.cb = cb
-  this.factor = 2
+  this.factor = factor
 }
 
 function multiply (arg, cb) {
@@ -44,9 +46,26 @@ function benchNeo (cb) {
   })
 }
 
+function benchAsync (cb) {
+  var factor = 2
+  async.map([1, 2, 3], function work (arg, cb) {
+    setImmediate(cb, null, arg * factor)
+  }, function (err, results) {
+    if (err) { return cb(err) }
+
+    var acc = 0
+    for (var i = 0; i < results.length; i++) {
+      acc += results[i]
+    }
+
+    cb(null, acc)
+  })
+}
+
 if (require.main == module) {
   var run = bench([
     benchSteed,
+    benchAsync,
     benchNeo
   ], max)
 

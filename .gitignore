@@ -2,4 +2,4 @@ node_modules
 bower_components
 dist
 pdf
-bespoke-theme-*
+bespoke-theme-*.DS_Store
